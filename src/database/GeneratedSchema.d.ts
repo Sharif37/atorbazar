@@ -18,11 +18,15 @@ export type JsonValue = JsonArray | JsonObject | JsonPrimitive;
 
 export interface Address {
   address_id: string;
+  address_type: "delivery_address" | "present_address";
+  country: string | null;
   district: string | null;
   division: string | null;
+  post_office: string | null;
   postal_code: number | null;
   thana: string | null;
   union: string | null;
+  upzilla: string | null;
   village: string | null;
 }
 
@@ -36,6 +40,12 @@ export interface Admin {
   password: string | null;
   role_type: string | null;
   username: string | null;
+}
+
+export interface AuthSession {
+  created_at: Generated<Date>;
+  session_id: string;
+  user_id: string;
 }
 
 export interface Cart {
@@ -101,13 +111,16 @@ export interface Product {
   terms_and_conditions: Json | null;
 }
 
+export interface Roles {
+  end_date: Date | null;
+  role: string;
+  start_date: Generated<Date>;
+  user_id: string;
+}
+
 export interface Seller {
   company_name: string | null;
-  email: string | null;
-  isApproved: number | null;
-  mobile: string | null;
-  name: string | null;
-  password: string | null;
+  isApproved: Generated<number | null>;
   seller_id: string;
 }
 
@@ -131,11 +144,13 @@ export interface UserOrder {
 export interface DB {
   Address: Address;
   Admin: Admin;
+  Auth_Session: AuthSession;
   Cart: Cart;
   Cart_Item: CartItem;
   Delivery: Delivery;
   Order: Order;
   Product: Product;
+  Roles: Roles;
   Seller: Seller;
   User: User;
   user_order: UserOrder;
