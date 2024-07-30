@@ -11,5 +11,5 @@ function generateToken(length: number) {
   }
   return token;
 }
-
+//console.log(generateToken(32));
 export default generateToken ;
