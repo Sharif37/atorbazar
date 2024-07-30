@@ -5,7 +5,7 @@ import { Role } from "./auth/register";
 
 const myInfo = express.Router();
 
-myInfo.get("/me",verifySession,requireRole(Role.Customer), async (req: SessionRequest, res) => {
+myInfo.get("/me",verifySession,requireRole([Role.Customer]), async (req: SessionRequest, res) => {
   try {
     const userId = req.user?.user_id;
 
