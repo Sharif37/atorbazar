@@ -18,7 +18,7 @@ export function verifySession(
   try {
     const bearerHeader = authHeader.parse(req.headers["authorization"]);
     const token = z.string().parse(bearerHeader.split(" ")[1]);
-    console.log(token);
+   /// console.log(token);
 
     // Verify the token here
     jwt.verify(
@@ -26,7 +26,9 @@ export function verifySession(
       process.env.SECRET_TOKEN ?? "secret_key",
       (err, decoded) => {
         if (err) {
-          return res.status(403).json({ message: "Invalid or expired token.try to login again." });
+          return res
+            .status(403)
+            .json({ message: "Invalid or expired token.try to login again." });
         }
         req.user = decoded as { user_id: string; role: Role };
         next();
@@ -49,14 +51,13 @@ export function generateJWT(user_id: string, role: Role) {
   });
 }
 
-
-export function requireRole(role: Role) {
-    return function (req: SessionRequest, res: Response, next: NextFunction) {
-       // console.log(req.user);
-      if (!req.user || req.user.role !== role) {
-        return res.status(403).json({ message: "Forbidden: Insufficient role" });
-      }
-      next();
-    };
-  }
-  
+export function requireRole(roles: Role[]) {
+  //console.log(roles);
+  return function (req: SessionRequest, res: Response, next: NextFunction) {
+    //console.log(req.user);
+    if (!req.user || !roles.includes(req.user.role)) {
+      return res.status(403).json({ message: "Forbidden: Insufficient role" });
+    }
+    next();
+  };
+}

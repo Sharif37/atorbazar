@@ -10,12 +10,20 @@ const dialect = new MysqlDialect({
 
 const db=new Kysely<DB>({dialect,});
 
-// const Adminpool = createPool({
-//   host: AdminCreds.host,
-//   user: AdminCreds.user,
-//   password: AdminCreds.password,
-//   database: AdminCreds.database,
-// });
+export type TableName =
+  | 'Address'
+  | 'Admin'
+  | 'Auth_Session'
+  | 'Cart'
+  | 'Cart_Item'
+  | 'Delivery'
+  | 'Order'
+  | 'Product'
+  | 'Roles'
+  | 'Seller'
+  | 'User'
+  | 'user_order';
+
 
 
 export {db}
