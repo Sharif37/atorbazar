@@ -4,6 +4,7 @@ import logInRouter from "./routes/auth/login";
 import registerRoute from "./routes/auth/register";
 import myInfo from "./routes/myInfo";
 import productRouter from "./routes/product";
+import addressRouter from "./routes/address";
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -15,6 +16,9 @@ app.use("/api/info", myInfo);
 
 //product routes
 app.use("/api/product", productRouter);
+
+//address routes
+app.use("/api/address",addressRouter);
 
 app.listen(port, () => {
   console.log(
