@@ -5,6 +5,9 @@ import registerRoute from "./routes/auth/register";
 import myInfo from "./routes/myInfo";
 import productRouter from "./routes/product";
 import addressRouter from "./routes/address";
+import cartItemRouter from "./routes/cart_item";
+import orderRouter from "./routes/order";
+import transactionRouter from "./routes/transactions";
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -19,6 +22,10 @@ app.use("/api/product", productRouter);
 
 //address routes
 app.use("/api/address",addressRouter);
+//cart routes
+app.use("/api/cart",cartItemRouter);
+app.use("/api/order",orderRouter);
+app.use("/api/transaction",transactionRouter);
 
 app.listen(port, () => {
   console.log(

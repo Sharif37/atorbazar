@@ -1,5 +1,7 @@
 import type { ColumnType } from "kysely";
 
+export type Decimal = ColumnType<string, number | string, number | string>;
+
 export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
   ? ColumnType<S, I | undefined, U>
   : ColumnType<T, T | undefined, T>;
@@ -56,7 +58,7 @@ export interface Cart {
 export interface CartItem {
   cart_id: string;
   cost: number | null;
-  product_id: string | null;
+  product_id: string;
   quantity: number | null;
   status: number | null;
 }
@@ -77,7 +79,7 @@ export interface Delivery {
 export interface Order {
   address_id: string;
   cart_id: string;
-  cost: number | null;
+  cost: Decimal | null;
   is_confirm: number | null;
   mobile_no: string | null;
   order_id: string;
@@ -85,8 +87,9 @@ export interface Order {
   quantity: number | null;
   seller_id: string;
   status: number | null;
-  time_stamp: Date | null;
+  time_stamp: Generated<Date | null>;
   transaction_id: string;
+  user_id: string;
 }
 
 export interface Product {
@@ -124,6 +127,18 @@ export interface Seller {
   seller_id: string;
 }
 
+export interface Transaction {
+  amount: Decimal;
+  details: string | null;
+  order_id: string;
+  payment_method: "Bank Transfer" | "Bkash" | "Cash On Delivery" | "Credit Card" | "Nagad" | "PayPal" | "Rocket";
+  status: "Completed" | "Failed" | "Pending";
+  transaction_date: Generated<Date | null>;
+  transaction_id: string;
+  transaction_type: "Payment" | "Refund";
+  user_id: string;
+}
+
 export interface User {
   address_id: string | null;
   coin: Generated<number | null>;
@@ -152,6 +167,7 @@ export interface DB {
   Product: Product;
   Roles: Roles;
   Seller: Seller;
+  Transaction: Transaction;
   User: User;
   user_order: UserOrder;
 }

@@ -22,7 +22,8 @@ export type TableName =
   | 'Roles'
   | 'Seller'
   | 'User'
-  | 'user_order';
+  | 'user_order'
+  | 'Transaction' ;
 
 
 

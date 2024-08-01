@@ -4,6 +4,7 @@ import {  TableName } from "../database";
 import { DB } from "../database/GeneratedSchema";
 import { addProductFilters } from "./addProductFilters";
 import { addAddressFilters } from "./addAddressFilters";
+import { addOrderFilters } from "./addOrderFilters";
 
 export function addFiltration(
   table: TableName,
@@ -15,6 +16,10 @@ export function addFiltration(
     query = addProductFilters(req, query as any);
   } else if(table === "Address"){
     query=addAddressFilters(req,query as any);
+  }
+  else if(table === "Order")
+  {
+    query=addOrderFilters(req,query as any) ;
   }
 
   return query as any;
