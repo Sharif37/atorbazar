@@ -8,6 +8,7 @@ import addressRouter from "./routes/address";
 import cartItemRouter from "./routes/cart_item";
 import orderRouter from "./routes/order";
 import transactionRouter from "./routes/transactions";
+import userRouter from "./routes/user";
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -26,6 +27,7 @@ app.use("/api/address",addressRouter);
 app.use("/api/cart",cartItemRouter);
 app.use("/api/order",orderRouter);
 app.use("/api/transaction",transactionRouter);
+app.use("/api/user",userRouter);
 
 app.listen(port, () => {
   console.log(

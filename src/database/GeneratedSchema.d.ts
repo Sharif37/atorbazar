@@ -33,15 +33,9 @@ export interface Address {
 }
 
 export interface Admin {
-  admin_id: number;
-  email: string | null;
-  emp_id: number;
-  first_name: string | null;
-  last_name: string | null;
-  mobile: string | null;
-  password: string | null;
+  admin_id: string;
+  emp_id: string;
   role_type: string | null;
-  username: string | null;
 }
 
 export interface AuthSession {
@@ -89,7 +83,7 @@ export interface Order {
   status: number | null;
   time_stamp: Generated<Date | null>;
   transaction_id: string;
-  user_id: string;
+  user_id: string | null;
 }
 
 export interface Product {
