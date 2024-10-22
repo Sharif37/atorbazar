@@ -3,7 +3,7 @@ import z from "zod";
 import { db } from "../database";
 import { requireRole, verifySession } from "./auth/auth";
 import generateToken from "./auth/generateRandomNumber";
-import { Role } from "./auth/register";
+import { Role } from "./auth/roles";
 
 const cartItemRouter = express.Router();
 

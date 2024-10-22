@@ -4,7 +4,7 @@ import { db } from "../database";
 import { addFiltration } from "../helper/addFiltration";
 import { paginatedResults } from "../helper/paginatedResults";
 import { requireRole, verifySession } from "./auth/auth";
-import { Role } from "./auth/register";
+import { Role } from "./auth/roles";
 
 const addressRouter = express.Router();
 export enum Address {
@@ -28,7 +28,7 @@ const addressBody = z.object({
 addressRouter.post(
   "/addAddress",
   verifySession,
-  requireRole([Role.Customer,Role.Seller]),
+  requireRole([Role.Customer]),
   async (req, res) => {
     try {
       const addressData = addressBody.parse(req.body);

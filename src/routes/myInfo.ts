@@ -1,11 +1,11 @@
 import express from "express";
 import { db } from "../database";
 import { SessionRequest, verifySession,requireRole } from "./auth/auth";
-import { Role } from "./auth/register";
+import { Role } from "./auth/roles";
 
 const myInfo = express.Router();
 
-myInfo.get("/me",verifySession,requireRole([Role.Customer,Role.Admin,Role.Seller]), async (req: SessionRequest, res) => {
+myInfo.get("/me",verifySession,requireRole([Role.Admin,Role.Seller]), async (req: SessionRequest, res) => {
   try {
     const userId = req.user?.user_id;
 

@@ -4,7 +4,7 @@ import { db } from "../database";
 import { addFiltration } from "../helper/addFiltration";
 import { paginatedResults } from "../helper/paginatedResults";
 import { requireRole, verifySession } from "./auth/auth";
-import { Role } from "./auth/register";
+import { Role } from "./auth/roles";
 
 const productRouter = express.Router();
 

@@ -4,7 +4,7 @@ import { db } from "../database";
 import { paginatedResults } from "../helper/paginatedResults";
 import { requireRole, verifySession } from "./auth/auth";
 import generateToken from "./auth/generateRandomNumber";
-import { Role } from "./auth/register";
+import { Role } from "./auth/roles";
 import { addFiltration } from "../helper/addFiltration";
 
 const transactionRouter = express.Router();

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
-import { Role } from "./register";
+import { Role } from "./roles";
 
 const authHeader = z.string();
 

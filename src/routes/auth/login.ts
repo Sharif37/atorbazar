@@ -3,7 +3,7 @@ import express, { RouterOptions } from "express";
 import { z } from "zod";
 import { db } from "../../database";
 import { generateJWT, verifySession } from "./auth";
-import { Role } from "./register";
+import { Role } from "./roles";
 
 const routerOptions: RouterOptions = {
   caseSensitive: true,
