@@ -3,7 +3,7 @@ import z from "zod";
 import { db } from "../database"; // Assume you have a db instance
 import { requireRole, verifySession } from "./auth/auth";
 import generateToken from "./auth/generateRandomNumber";
-import { Role } from "./auth/register";
+import { Role } from "./auth/roles";
 import { paginatedResults } from "../helper/paginatedResults";
 import { addFiltration } from "../helper/addFiltration";
 
@@ -71,7 +71,8 @@ orderRouter.post(
 );
 
 // Get all orders
-orderRouter.get("/", async (req, res) => {
+orderRouter.get("/",verifySession,
+  requireRole([Role.Customer, Role.Admin]), async (req, res) => {
   try {
     var query = db.selectFrom("Order").selectAll();
     query = addFiltration("Order", query, req);
@@ -84,7 +85,10 @@ orderRouter.get("/", async (req, res) => {
 });
 
 // Get an order by ID
-orderRouter.get("/:order_id", async (req, res) => {
+orderRouter.get("/:order_id",
+  verifySession,
+  requireRole([Role.Customer, Role.Admin]),
+   async (req, res) => {
   try {
     const { order_id } = req.params;
     const order = await db
@@ -139,7 +143,7 @@ orderRouter.put(
 orderRouter.delete(
   "/delete/:order_id",
   verifySession,
-  requireRole([Role.Customer]),
+  requireRole([Role.Admin]),
   async (req, res) => {
     try {
       const { order_id } = req.params;
@@ -226,7 +230,8 @@ orderRouter.patch(
 );
 
 // Get orders by user
-orderRouter.get("/users/:user_id", async (req, res) => {
+orderRouter.get("/users/:user_id",verifySession,
+  requireRole([Role.Customer, Role.Admin]), async (req, res) => {
   try {
     const { user_id } = req.params;
     const orders = await db
@@ -242,7 +247,8 @@ orderRouter.get("/users/:user_id", async (req, res) => {
 });
 
 // Get orders by seller
-orderRouter.get("/sellers/:seller_id", async (req, res) => {
+orderRouter.get("/sellers/:seller_id",verifySession,
+  requireRole([Role.Customer, Role.Admin]), async (req, res) => {
   try {
     const { seller_id } = req.params;
     const orders = await db
@@ -258,7 +264,8 @@ orderRouter.get("/sellers/:seller_id", async (req, res) => {
 });
 
 // Get orders by status
-orderRouter.get("/status/:status", async (req, res) => {
+orderRouter.get("/status/:status",verifySession,
+  requireRole([Role.Customer]), async (req, res) => {
   try {
     const { status } = req.params;
     const orders = await db

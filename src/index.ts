@@ -25,8 +25,11 @@ app.use("/api/product", productRouter);
 app.use("/api/address",addressRouter);
 //cart routes
 app.use("/api/cart",cartItemRouter);
+//order routes 
 app.use("/api/order",orderRouter);
+//transaction routes 
 app.use("/api/transaction",transactionRouter);
+//user routes 
 app.use("/api/user",userRouter);
 
 app.listen(port, () => {

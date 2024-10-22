@@ -3,6 +3,7 @@ import express, { RouterOptions } from "express";
 import { z } from "zod";
 import { db } from "../../database";
 import generateToken from "./generateRandomNumber";
+import { Role } from "./roles";
 
 const routerOptions: RouterOptions = {
   caseSensitive: true,
@@ -10,11 +11,6 @@ const routerOptions: RouterOptions = {
 const signUpRouter = express.Router(routerOptions);
 const saltRounds = 10;
 
-export enum Role {
-  Customer = "Customer",
-  Admin = "Admin",
-  Seller = "Seller",
-}
 
 
 export const UserBodySchema = z.object({
